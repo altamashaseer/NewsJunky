@@ -14,7 +14,7 @@ export class News extends Component {
     //         "url": "https://www.reuters.com/world/asia-pacific/magnitude-76-earthquake-strikes-eastern-new-guinea-region-papua-new-guinea-emsc-2022-09-11/",
     //         "urlToImage": "https://www.reuters.com/pf/resources/images/reuters/reuters-default.png?d=109",
     //         "publishedAt": "2022-09-11T12:35:00Z",
-    //         "content": "Sept 11 (Reuters) - An earthquake of magnitude 7.6 struck eastern Papua New Guinea on Sunday killing at least four people, injuring others and damaging property and essential infrastructure.\r\nThe qua… [+2168 chars]"
+    //         "content": "Sept 11 (Reuters) - An earthquake of magnitude 7.6 struck eastern Papua New Guinea on Sunday killing at least four people, injuring others and damaging property and essential infrastructure.\r\nThe qua… [+this.props.pageSize68 chars]"
     //     },
     //     {
     //         "source": {
@@ -268,24 +268,23 @@ export class News extends Component {
         super();
         this.state = {
             articles: [],
-            loading: false,
+            // loading: false,
             page: 1
         }
     }
 
     async componentDidMount() {
-        let url = 'https://newsapi.org/v2/everything?q=india&apiKey=9e711474894c41b5a9909b9929883593&page=1&pageSize=21';
+        let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=9e711474894c41b5a9909b9929883593&page=1&pageSize=${this.props.pageSize}`;
         let data = await fetch(url);
         let parsedData = await data.json();
         this.setState({
-            articles: parsedData.articles
+            articles: parsedData.articles,
+            totalResults: parsedData.totalResults
         })
-        // console.log(data); 
-        // console.log(parsedData); 
     }
 
     handlePreviousClick = async () => {
-        let url = `https://newsapi.org/v2/everything?q=india&apiKey=9e711474894c41b5a9909b9929883593&page=${this.state.page - 1}&pageSize=21`;
+        let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=9e711474894c41b5a9909b9929883593&page=${this.state.page-1}&pageSize=${this.props.pageSize}`;
         let data = await fetch(url);
         let parsedData = await data.json();
         this.setState({
@@ -295,33 +294,35 @@ export class News extends Component {
     }
 
     handleNextClick = async () => {
-        let url = `https://newsapi.org/v2/everything?q=india&apiKey=9e711474894c41b5a9909b9929883593&page=${this.state.page + 1}&pageSize=21`;
-        let data = await fetch(url);
-        let parsedData = await data.json();
-        this.setState({
-            articles: parsedData.articles,
-            page: this.state.page + 1
-        })
+        
+        if (this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize)) {
+
+        } else {
+            let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=9e711474894c41b5a9909b9929883593&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
+            let data = await fetch(url);
+            let parsedData = await data.json();
+            this.setState({
+                articles: parsedData.articles,
+                page: this.state.page + 1
+            })
+        }
     }
 
     render() {
         return (
             <div className="container my-3">
-                <h1>NEWSJUNKY - Top Headlines</h1>
+                <h1 className='text-center'>NEWSJUNKY - Top Headlines Today</h1>
                 <div className="row">
                     {this.state.articles.map((element) => {
                         return <div className="col-md-4" key={element.url}>
                             <NewsItem title={element.title} description={element.description ? element.description.slice(0, 80) : ''} imageUrl={element.urlToImage}
                                 newsUrl={element.url} />
-                            {/* <NewsItem title={element.title?element.title.slice(0,40):''} description={element.description?element.description.slice(0,80):''} imageUrl={element.urlToImage} 
-                                newsUrl={element.url} /> */}
-                            {/* <NewsItem title={element.title?.slice(0,40)} description={element.description?.slice(0,80)} imageUrl={element.urlToImage} 
-                                newsUrl={element.url} />   THIS ALSO WORK WITHOUT TURNARY OPERATOR */}
                         </div>
                     })}
+
                     <div className="pagination d-flex justify-content-between my-5">
                         <button type="button" disabled={this.state.page <= 1} className="btn btn-dark" onClick={this.handlePreviousClick}>&laquo; Previous</button>
-                        <button type="button" className="btn btn-dark" onClick={this.handleNextClick}>Next &raquo;</button>
+                        <button type="button" disabled={this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize)} className="btn btn-dark" onClick={this.handleNextClick}>Next &raquo;</button>
                     </div>
                 </div>
             </div>
@@ -330,3 +331,10 @@ export class News extends Component {
 }
 
 export default News
+
+
+// NEWSITEM ALTERNATE: 
+{/* <NewsItem title={element.title?element.title.slice(0,40):''} description={element.description?element.description.slice(0,80):''} imageUrl={element.urlToImage} 
+newsUrl={element.url} /> */}
+{/* <NewsItem title={element.title?.slice(0,40)} description={element.description?.slice(0,80)} imageUrl={element.urlToImage} 
+newsUrl={element.url} />   THIS ALSO WORK WITHOUT TURNARY OPERATOR */}

@@ -8,7 +8,7 @@ export default class App extends Component {
     return (
       <div>
         <Navbar/>    {/* camel case mandetory */}
-        <News pageSize='6' country='in'/>
+        <News pageSize='6' country='in' category='science' />
       </div>
     )
   }

@@ -1,0 +1,387 @@
+import React, { Component } from 'react'
+import NewsItem from './NewsItem'
+import Spinner from './Spinner';
+// import PropTypes from 'prop-types'
+
+
+
+export class News extends Component {
+    // articles = [
+    //     {
+    //         "source": {
+    //             "id": "reuters",
+    //             "name": "Reuters"
+    //         },
+    //         "author": null,
+    //         "title": "Powerful quake hits Papua New Guinea, at least 4 dead - Reuters",
+    //         "description": "An earthquake of magnitude 7.6 struck eastern Papua New Guinea on Sunday killing at least four people, injuring others and damaging property and essential infrastructure.",
+    //         "url": "https://www.reuters.com/world/asia-pacific/magnitude-76-earthquake-strikes-eastern-new-guinea-region-papua-new-guinea-emsc-2022-09-11/",
+    //         "urlToImage": "https://www.reuters.com/pf/resources/images/reuters/reuters-default.png?d=109",
+    //         "publishedAt": "2022-09-11T12:35:00Z",
+    //         "content": "Sept 11 (Reuters) - An earthquake of magnitude 7.6 struck eastern Papua New Guinea on Sunday killing at least four people, injuring others and damaging property and essential infrastructure.\r\nThe qua… [+this.props.pageSize68 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": null,
+    //             "name": "CBS Sports"
+    //         },
+    //         "author": "",
+    //         "title": "NFL Week 1 odds, picks, how to watch, streaming: Expert picks, teasers, survivor picks and more - CBS Sports",
+    //         "description": "CBSSports.com and SportsLine break down every single NFL game in Week 1",
+    //         "url": "https://www.cbssports.com/nfl/news/nfl-week-1-odds-picks-how-to-watch-streaming-expert-picks-teasers-survivor-picks-and-more/",
+    //         "urlToImage": "https://sportshub.cbsistatic.com/i/r/2022/09/08/ad820e01-61f3-4ac0-8f1d-a4636a6f1127/thumbnail/1200x675/0226c3a28b9f6ab31e8b925b77d3e948/tom-brady-getty-images-cbs.jpg",
+    //         "publishedAt": "2022-09-11T12:12:00Z",
+    //         "content": "The first Sunday of the new NFL season is finally upon us! While we had a little appetizer with the Bills and Rams kicking off the year Thursday, it's time for the main course today, where we can sin… [+15479 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": null,
+    //             "name": "BBC News"
+    //         },
+    //         "author": "https://www.facebook.com/bbcnews",
+    //         "title": "Kharkiv offensive: Ukrainian army says it has tripled retaken area - BBC",
+    //         "description": "On Saturday, Ukraine captured key eastern towns, as Russian forces withdrew to \"regroup\".",
+    //         "url": "https://www.bbc.com/news/world-europe-62867560",
+    //         "urlToImage": "https://ichef.bbci.co.uk/news/1024/branded_news/D4F5/production/_126671545_gettyimages-1243099873.jpg",
+    //         "publishedAt": "2022-09-11T11:50:45Z",
+    //         "content": "By Hugo Bachega and Orla Guerin in Ukraine and Matt Murphy in London BBC News\r\nMedia caption, Watch: Ukrainian military enter key city of Kupiansk\r\nUkraine's military says its forces have retaken ove… [+4509 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": "politico",
+    //             "name": "Politico"
+    //         },
+    //         "author": null,
+    //         "title": "Who will control the House? Look to New York. - POLITICO",
+    //         "description": "New York — which hasn't elected a Republican statewide in 20 years — is one of the most unlikely stages of political theater this election cycle.",
+    //         "url": "https://www.politico.com/news/2022/09/11/new-york-house-races-election-2022-00055485",
+    //         "urlToImage": "https://static.politico.com/60/c6/240325f24d1cb70ef0161aa046e3/ap22231016477642.jpg",
+    //         "publishedAt": "2022-09-11T11:00:00Z",
+    //         "content": "By many predictions, New York has as many contested seats as any state in the nation, and POLITICOs Election Forecast puts two as toss-ups; three as leaning Democratic and one leaning Republican. Tha… [+12882 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": "business-insider",
+    //             "name": "Business Insider"
+    //         },
+    //         "author": "Jyoti Mann",
+    //         "title": "China plans three Moon missions after discovering new lunar mineral - Business Insider",
+    //         "description": "The mineral, Changesite-(Y), was found in samples obtained by China's space exploration in 2020 and could prove to be a source of energy.",
+    //         "url": "https://www.businessinsider.com/china-plans-three-moon-missions-after-discovering-new-lunar-mineral-2022-9",
+    //         "urlToImage": "https://i.insider.com/631da68189d2b300189489be?width=1200&format=jpeg",
+    //         "publishedAt": "2022-09-11T10:24:31Z",
+    //         "content": "China is aiming to launch three missions to the moon after discovering a new lunar mineral that could be an energy source in the future.\r\nThe space race between China and the US is accelerating after… [+1426 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": "fox-news",
+    //             "name": "Fox News"
+    //         },
+    //         "author": "Landon Mion",
+    //         "title": "Ukrainian nuclear power plant stops operations as safety measure - Fox News",
+    //         "description": "The Zaporizhzhia Nuclear Power Plant in Ukraine has stopped all operations as a safety measure, the state agency in charge of the plant said Sunday.",
+    //         "url": "https://www.foxnews.com/world/ukrainian-nuclear-power-plant-stops-operations-safety-measure",
+    //         "urlToImage": "https://static.foxnews.com/foxnews.com/content/uploads/2022/09/2022-08-22T185339Z_1737636731_RC2L1W9THG1A_RTRMADP_3_UKRAINE-CRISIS-ZAPORIZHZHIA-NUCLEAR.jpg",
+    //         "publishedAt": "2022-09-11T10:11:15Z",
+    //         "content": "The Russian-held Zaporizhzhia Nuclear Power Plant in Ukraine has halted operations as a safety measure, according to a Sunday statement from Energoatom, the state agency in charge of the plant.\r\nThe … [+1899 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": "cnn",
+    //             "name": "CNN"
+    //         },
+    //         "author": "Catherine Thorbecke",
+    //         "title": "Why wireless carriers are able to give out iPhone 14s - CNN",
+    //         "description": "The unveiling of the latest iPhone 14 lineup earlier this week has already spurred a flurry of new promotions from wireless giants including AT&T, T-Mobile and Verizon.",
+    //         "url": "https://www.cnn.com/2022/09/11/tech/iphone-14-carrier-deals-what-to-know/index.html",
+    //         "urlToImage": "https://media.cnn.com/api/v1/images/stellar/prod/220909122405-apple-iphone-14-0907.jpg?q=w_800,c_fill",
+    //         "publishedAt": "2022-09-11T09:07:00Z",
+    //         "content": "The unveiling of the latest iPhone 14 lineup earlier this week has already spurred a flurry of new promotions from wireless giants including AT&amp;T, T-Mobile and Verizon. \r\nAll three of the major U… [+3105 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": null,
+    //             "name": "KCRA Sacramento"
+    //         },
+    //         "author": "KCRA Staff",
+    //         "title": "Mosquito Fire burns more than 33K acres, forces more evacuations - KCRA Sacramento",
+    //         "description": "The fire began in Placer County and jumped the American River into El Dorado County on Thursday",
+    //         "url": "https://www.kcra.com/article/mosquito-fire-evacuations-placer-el-dorado-county-september-10/41147456",
+    //         "urlToImage": "https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/ap22251662839332.jpg?crop=1.00xw:0.846xh;0,0.0587xh&resize=1200:*",
+    //         "publishedAt": "2022-09-11T09:01:00Z",
+    //         "content": "The fast-moving wildfire in Northern California is forcing more people to evacuate their homes on Saturday after an active week of fire activity, posing a significant challenge for fire crews as it n… [+8611 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": null,
+    //             "name": "MacRumors"
+    //         },
+    //         "author": "Hartley Charlton",
+    //         "title": "All the iOS 16 Features You Won't Get Until Later This Year - MacRumors",
+    //         "description": "There are usually multiple features that Apple is not able to finish before the first official release of a major new version of iOS, and this year...",
+    //         "url": "https://www.macrumors.com/2022/09/11/delayed-ios-16-features/",
+    //         "urlToImage": "https://images.macrumors.com/t/Nzx0trTg0ivFwO5N7ZXe1UJTfLg=/1920x/article-new/2022/06/ios-16-lock-screen-feature.jpg",
+    //         "publishedAt": "2022-09-11T09:00:00Z",
+    //         "content": "There are usually multiple features that Apple is not able to finish before the first official release of a major new version of iOS, and this year looks to be no different, with a total of nine iOS … [+3090 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": null,
+    //             "name": "MMA Fighting"
+    //         },
+    //         "author": "MMA Fighting Newswire",
+    //         "title": "UFC 279 post-fight show: Reaction to Nate Diaz’s perfect exit, Khamzat Chimaev’s destruction - MMA Fighting",
+    //         "description": "Nate Diaz and Khamzat Chimaev didn’t end up fighting each other in the end, but both men ended their nights in the best possible way at UFC 279. MMA Fighting’s Mike Heck, José Youngs, Alexander K....",
+    //         "url": "https://www.mmafighting.com/2022/9/11/23346961/ufc-279-post-fight-show-reaction-to-nate-diazs-perfect-exit-khamzat-chimaevs-destruction",
+    //         "urlToImage": "https://cdn.vox-cdn.com/thumbor/w9fWnM9D51B2KEUwRqL_181ObFk=/0x0:4617x2417/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/24012367/1422683261.jpg",
+    //         "publishedAt": "2022-09-11T08:59:34Z",
+    //         "content": "Nate Diaz and Khamzat Chimaev didnt end up fighting each other in the end, but both men ended their nights in the best possible way at UFC 279.\r\nMMA Fightings Mike Heck, José Youngs, Alexander K. Lee… [+719 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": "the-washington-post",
+    //             "name": "The Washington Post"
+    //         },
+    //         "author": "Rachel Pannett",
+    //         "title": "Princes William and Harry, with Catherine and Meghan, greet mourners - The Washington Post",
+    //         "description": "King Charles III's sons, the Prince of Wales and Prince Harry, made a rare joint public appearance with their wives at Windsor Castle after Queen Elizabeth II's death.",
+    //         "url": "https://www.washingtonpost.com/world/2022/09/11/queen-elizabeth-death-william-harry-meghan-kate/",
+    //         "urlToImage": "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://d1i4t8bqe7zgj6.cloudfront.net/09-10-2022/t_db8429cdfa294815b791d1155d1c02e4_name_HarryMeghanTHUMB.jpg&w=1440",
+    //         "publishedAt": "2022-09-11T08:37:22Z",
+    //         "content": "Princes William and Harry together with their wives made a rare joint appearance on Saturday, greeting well-wishers gathered outside of Windsor Castle, near London, to mourn Queen Elizabeth II.\r\nThe … [+4262 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": "associated-press",
+    //             "name": "Associated Press"
+    //         },
+    //         "author": "Ken Sweet",
+    //         "title": "Visa, Mastercard, AmEx to start categorizing gun shop sales - The Associated Press",
+    //         "description": "NEW YORK (AP) — Payment processor Visa Inc. said Saturday that it plans to start separately categorizing sales at gun shops, a major win for gun control advocates who say it will help better track suspicious surges of gun sales that could be a prelude to a ma…",
+    //         "url": "https://apnews.com/4aae50c67e40f9683f604a8683acc391/",
+    //         "urlToImage": "https://storage.googleapis.com/afs-prod/media/8fc0c044af78402fbb4ce8aaaef28b27/3000.jpeg",
+    //         "publishedAt": "2022-09-11T08:23:35Z",
+    //         "content": "NEW YORK (AP) Payment processor Visa Inc. said Saturday that it plans to start separately categorizing sales at gun shops, a major win for gun control advocates who say it will help better track susp… [+4830 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": "reuters",
+    //             "name": "Reuters"
+    //         },
+    //         "author": null,
+    //         "title": "Swedes head to polls in close-run election - Reuters",
+    //         "description": "Swedes voted on Sunday in an election pitting the incumbent centre-left Social Democrats against a right-wing bloc that has embraced the anti-immigration Sweden Democrats as it tries to win back power after eight years in opposition.",
+    //         "url": "https://www.reuters.com/world/europe/swedes-head-polls-close-run-election-marked-by-crime-energy-crisis-2022-09-10/",
+    //         "urlToImage": "https://www.reuters.com/resizer/m8JUL47Zv4vkoWqtG7MbnIbn3Ok=/1200x628/smart/filters:quality(80)/cloudfront-us-east-2.images.arcpublishing.com/reuters/VPJHQ35EUJNQFNNDH46LYZJ4DE.jpg",
+    //         "publishedAt": "2022-09-11T08:22:00Z",
+    //         "content": "STOCKHOLM, Sept 11 (Reuters) - Swedes voted on Sunday in an election pitting the incumbent centre-left Social Democrats against a right-wing bloc that has embraced the anti-immigration Sweden Democra… [+3843 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": null,
+    //             "name": "TMZ"
+    //         },
+    //         "author": "TMZ Staff",
+    //         "title": "Swae Lee Has 1-Year-Old Daughter, Files for Joint Custody - TMZ",
+    //         "description": "Swae Lee has a 1-year-old daughter with a Brazilian model, and he's filed in court to establish custody.",
+    //         "url": "https://www.tmz.com/2022/09/11/swae-lee-daughter-files-custody-rap/",
+    //         "urlToImage": "https://imagez.tmz.com/image/7c/16by9/2022/09/08/7c1f7fc11f5a46bab2025a15632764e8_xl.jpg",
+    //         "publishedAt": "2022-09-11T08:00:00Z",
+    //         "content": "Rapper Swae Lee has a 1-year-old child, TMZ has learned ... and he's filed in L.A. court to establish joint custody.\r\nAccording to legal docs, obtained by TMZ, Swae had a daughter back in 2020 with B… [+1522 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": "fox-news",
+    //             "name": "Fox News"
+    //         },
+    //         "author": "Brie Stimson",
+    //         "title": "Harrison Ford chokes up while talking about his last 'Indiana Jones' film at Disney D23 expo: 'I'm very proud' - Fox News",
+    //         "description": "Harrison Ford said the fifth \"Indiana Jones\" movie is \"fantastic\" before the audience at Disney's D23 Expo got an exclusive look at a teaser trailer on Saturday.",
+    //         "url": "https://www.foxnews.com/entertainment/harrison-ford-chokes-up-while-talking-about-last-indiana-jones-film-disney-d23-expo-im-very-proud",
+    //         "urlToImage": "https://static.foxnews.com/foxnews.com/content/uploads/2022/09/harrison-ford-d23.jpg",
+    //         "publishedAt": "2022-09-11T07:42:47Z",
+    //         "content": "Harrison Ford choked up on Saturday while talking about the fifth \"Indiana Jones\" installment, which will be the 80-year-old actors last turn as the whip-cracking archeologist. \r\n\"Thank you for makin… [+3465 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": null,
+    //             "name": "NDTV News"
+    //         },
+    //         "author": null,
+    //         "title": "New York Declares State of Emergency Over Polio After Virus Found In Wastewater - NDTV",
+    //         "description": "New York declared a state of emergency over polio in an effort to boost vaccination rates after evidence of the virus's spread mounted when it was found in wastewater samples.",
+    //         "url": "https://www.ndtv.com/world-news/new-york-declares-state-of-emergency-over-polio-after-virus-found-in-wastewater-3334591",
+    //         "urlToImage": "https://c.ndtvimg.com/2022-09/t0bhm95_polio-generic_625x300_11_September_22.jpg",
+    //         "publishedAt": "2022-09-11T06:53:52Z",
+    //         "content": "New York health department has asked people not to take polio lightly.\r\nNew York declared a state of emergency over polio in an effort to boost vaccination rates after evidence of the virus's spread … [+1204 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": null,
+    //             "name": "YouTube"
+    //         },
+    //         "author": null,
+    //         "title": "King Charles III News LIVE | King Charles Proclaimed Monarch of Australia | English News LIVE - CNN-News18",
+    //         "description": null,
+    //         "url": "https://www.youtube.com/supported_browsers?next_url=https:%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D45xnXaAVr8s",
+    //         "urlToImage": null,
+    //         "publishedAt": "2022-09-11T05:26:04Z",
+    //         "content": null
+    //     },
+    //     {
+    //         "source": {
+    //             "id": "business-insider",
+    //             "name": "Business Insider"
+    //         },
+    //         "author": "Kelsey Vlamis",
+    //         "title": "Trump loved the Queen but may be up to Biden to invite him to funeral - Business Insider",
+    //         "description": "Trump said the Queen was a \"grand and beautiful lady\" and \"there was nobody like her!\" but CNN reported it's up to Biden to invite him to the funeral.",
+    //         "url": "https://www.businessinsider.com/trump-loved-queen-but-biden-to-invite-him-to-funeral-2022-9",
+    //         "urlToImage": "https://i.insider.com/631d656c89d2b300189488a1?width=1200&format=jpeg",
+    //         "publishedAt": "2022-09-11T05:01:12Z",
+    //         "content": "The Royal Family announced on Saturday that the funeral for Queen Elizabeth II will take place on September 19, but who exactly will make the guest list is still up in the air.\r\nThe Queen died on Thu… [+2768 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": null,
+    //             "name": "/FILM"
+    //         },
+    //         "author": "Chris Evangelista",
+    //         "title": "Glass Onion: A Knives Out Mystery Review: Rian Johnson Outdoes Himself With A Hilarious New Benoit Blanc Whodunit [TIFF] - /Film",
+    //         "description": "Glass Onion is even better than Knives Out.",
+    //         "url": "https://www.slashfilm.com/1002610/glass-onion-a-knives-out-mystery-review-rian-johnson-outdoes-himself-with-a-hilarious-new-benoit-blanc-mystery-tiff/",
+    //         "urlToImage": "https://www.slashfilm.com/img/gallery/glass-onion-a-knives-out-mystery-review-rian-johnson-outdoes-himself-with-a-hilarious-new-benoit-blanc-mystery-tiff/l-intro-1662870922.jpg",
+    //         "publishedAt": "2022-09-11T04:57:00Z",
+    //         "content": "Rian Johnson's \"Knives Out\" was a wonderful breath of fresh air an original film with a stellar cast and a funny, engrossing mystery with twists and turns. It reminded us that movies could be, ya kno… [+1372 chars]"
+    //     },
+    //     {
+    //         "source": {
+    //             "id": null,
+    //             "name": "Cointelegraph"
+    //         },
+    //         "author": "Arijit Sarkar",
+    //         "title": "SEC to address growing crypto issuer filings with specialized offices - Cointelegraph",
+    //         "description": "The SEC decided to set up two new offices this fall to provide specialized support to the seven offices currently responsible for reviewing issuer filings.",
+    //         "url": "https://cointelegraph.com/news/sec-to-address-growing-crypto-issuer-filings-with-specialized-offices",
+    //         "urlToImage": "https://images.cointelegraph.com/images/1200_aHR0cHM6Ly9zMy5jb2ludGVsZWdyYXBoLmNvbS91cGxvYWRzLzIwMjItMDkvMWM4ZmJhYzMtYzRhMS00N2Q2LWI5NGItMWVjODVhMTUzZDM0LmpwZw==.jpg",
+    //         "publishedAt": "2022-09-11T04:00:00Z",
+    //         "content": "In light of the influx of filings from cryptocurrency issuers in the United States, the Securities and Exchange Commission (SEC) decided to set up two new offices this fall to provide specialized sup… [+1754 chars]"
+    //     }
+    // ]
+
+
+    // static PropTypes={
+    //     country: PropTypes.string,
+    //     pageSize: PropTypes.number,
+    //     category: PropTypes.string
+    // }
+    static defaultProps={
+        country:'in',
+        pageSize: '6',
+        category: 'general'
+    }
+    capitalizeFirstLetter=(string)=>{
+        return string.charAt(0).toUpperCase()+string.slice(1);
+    }
+    constructor(props) {
+        super(props);
+        this.state = {
+            articles: [],
+            loading: false,
+            page: 1
+        }
+        document.title=`${this.capitalizeFirstLetter(this.props.category)} - NewsJunky`
+    }
+
+    async newsUpdate(){
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=9e711474894c41b5a9909b9929883593&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        this.setState({loading:true});
+        let data = await fetch(url);
+        let parsedData = await data.json();
+        this.setState({
+            articles: parsedData.articles,
+            totalResults: parsedData.totalResults,
+            loading: false
+        })
+    }
+
+    async componentDidMount() {
+        // let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=9e711474894c41b5a9909b9929883593&page=1&pageSize=${this.props.pageSize}`;
+        // this.setState({loading:true});
+        // let data = await fetch(url);
+        // let parsedData = await data.json();
+        // this.setState({
+        //     articles: parsedData.articles,
+        //     totalResults: parsedData.totalResults,
+        //     loading: false
+        // })
+         this.newsUpdate();
+    }
+
+    handlePreviousClick = async () => {
+        // let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=9e711474894c41b5a9909b9929883593&page=${this.state.page-1}&pageSize=${this.props.pageSize}`;
+        // this.setState({loading:true});
+        // let data = await fetch(url);
+        // let parsedData = await data.json();
+        // this.setState({
+        //     articles: parsedData.articles,
+        //     page: this.state.page - 1,
+        //     loading: false
+        // })
+        await this.setState({
+            page: this.state.page - 1
+        })
+         this.newsUpdate();
+    }
+
+    handleNextClick = async () => {
+        
+        if (this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize)) {
+
+        } else {
+            // let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=9e711474894c41b5a9909b9929883593&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
+            // this.setState({loading:true});
+            // let data = await fetch(url);
+            // let parsedData = await data.json();
+            // this.setState({
+            //     articles: parsedData.articles,
+            //     page: this.state.page + 1,
+            //     loading: false
+            // })
+            await this.setState({
+                page: this.state.page + 1
+            })
+             this.newsUpdate();
+        }
+    } 
+
+    render() {
+        return (
+            <div className="container my-3">
+                <h1 className='text-center'>NewsJunky - {this.capitalizeFirstLetter(this.props.category)} Headlines</h1>
+                {this.state.loading && <Spinner/>}
+                <div className="row">
+                    {this.state.articles.map((element) => {
+                        return <div className="col-md-4" key={element.url}>
+                            <NewsItem title={element.title} description={element.description ? element.description.slice(0, 80) : ''} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name}/>
+                        </div>
+                    })}
+
+                    <div className="pagination d-flex justify-content-between my-5">
+                        <button type="button" disabled={this.state.page <= 1} className="btn btn-dark" onClick={this.handlePreviousClick}>&laquo; Previous</button>
+                        <button type="button" disabled={this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize)} className="btn btn-dark" onClick={this.handleNextClick}>Next &raquo;</button>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+export default News
+
+
+// NEWSITEM ALTERNATE: 
+//  <NewsItem title={element.title?element.title.slice(0,40):''} description={element.description?element.description.slice(0,80):''} imageUrl={element.urlToImage} 
+// newsUrl={element.url} /> 
+//  <NewsItem title={element.title?.slice(0,40)} description={element.description?.slice(0,80)} imageUrl={element.urlToImage} 
+// newsUrl={element.url} />   THIS ALSO WORK WITHOUT TURNARY OPERATOR 

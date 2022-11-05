@@ -16,7 +16,7 @@ const App =()=> {
       <>
         <BrowserRouter>
           <LoadingBar color='#f11946' progress={progress}/>
-          <Navbar /> {/* camel case mandetory */}
+          <Navbar /> 
           <Routes>
             <Route path="/" element={<News setProgress={setProgress} apiKey={apiKey}  key='home' pageSize='6' country='in' category='general' />} />
             <Route path="/science" element={<News setProgress={setProgress} apiKey={apiKey}  key='science' pageSize='6' country='in' category='science' />} />

@@ -7,3 +7,12 @@
     position: absolute;
     right: 0;
 }
+#c-img-wrapper{
+    display: flex;
+    justify-content: center;
+}
+#c-img{
+    width:fit-content;
+    max-height: 250px;
+    overflow: hidden;
+}

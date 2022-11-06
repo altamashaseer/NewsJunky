@@ -4,25 +4,24 @@ import NewsItem from './NewsItem'
 import Spinner from './Spinner';
 import InfiniteScroll from "react-infinite-scroll-component";
 import PropTypes from 'prop-types'
+import Background from './Background';
 
 const News = (props) => {
     const [articles, setArticles] = useState([])
     const [loading, setLoading] = useState(false)
     const [page, setPage] = useState(1)
     const [totalResults, settotalResults] = useState(0)
-    const {Query}=useGlobalContext();
-    
-    
-    
+    const { Query } = useGlobalContext();
+
     const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
     document.title = `${capitalizeFirstLetter(Query)} - NewsJunky`
-    
+
     const newsUpdate = async () => {
         props.setProgress(10)
-        const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?page=${page}&api-key=${props.apiKey}&q=${Query}`;
-        console.log('news upadte');
+        const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?page=${page}&api-key=${props.apiKey}&q=${Query}&sort=relevance`;
+        // console.log('news update');
         setLoading(true)
         props.setProgress(30)
         let data = await fetch(url);
@@ -35,29 +34,29 @@ const News = (props) => {
     }
 
     const fetchMoreData = async () => {
-        // const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`;
-        const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?page=${page + 1}&api-key=${props.apiKey}&q=${Query}`;
-        console.log('fetch more');
+        const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?page=${page + 1}&api-key=${props.apiKey}&q=${Query}&sort=relevance`;
+        props.setProgress(30)
+        // console.log('fetch more');
         let data = await fetch(url);
         let parsedData = await data.json();
+        props.setProgress(70)
         setArticles(articles.concat(parsedData.response.docs))
         setPage(page + 1)
+        props.setProgress(100)
     };
     useEffect(() => {
         newsUpdate();
-        console.log('use effect');
+        // console.log('use effect');
         // eslint-disable-next-line
-    }, [])
+    }, [Query])
 
 
     return (
         <>
+            <Background />
             <h1 className='text-center'>NewsJunky - {capitalizeFirstLetter(Query)} Headlines</h1>
-            {/* <h2>{articles.length}</h2>
-            <h2>{totalResults}</h2> */}
             {loading && <Spinner />}
-
-
+             
             <InfiniteScroll dataLength={articles.length}
                 next={fetchMoreData}
                 hasMore={articles.length < totalResults}
@@ -73,6 +72,7 @@ const News = (props) => {
                     </div>
                 </div>
             </InfiniteScroll>
+            
         </>
     )
 }

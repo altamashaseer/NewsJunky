@@ -1,18 +1,32 @@
-.text-center{
-    margin:35px 0;
-    margin-top: 90px;
+body{
+    margin: 0;
+    padding: 0;
 }
-.badge{
+.text-center {
+    margin: 35px 0;
+    margin-top: 70px;
+}
+
+.badge {
     display: flex;
     position: absolute;
     right: 0;
 }
-#c-img-wrapper{
+
+#c-img-wrapper {
     display: flex;
     justify-content: center;
 }
-#c-img{
-    width:fit-content;
+
+#c-img {
+    width: fit-content;
     max-height: 250px;
     overflow: hidden;
+}
+#navbar{
+    box-shadow: 0 5px 15px rgb(0 0 0 / 10%);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 9;
 }

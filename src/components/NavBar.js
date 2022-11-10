@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useGlobalContext } from './Context';
 import Search from './Search';
+import logo from '../media/logo.png'
 
 const NavBar = () => {
     const { setQuery } = useGlobalContext();
@@ -16,7 +17,7 @@ const NavBar = () => {
         <div id='navbar'>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
                 <div class="container-fluid">
-                    <Link className="navbar-brand" onClick={() => { setQuery('general') }} to="/">NewsJunky</Link>
+                    <Link className="navbar-brand" onClick={() => { setQuery('general') }} to="/"> <img id='logo' src={logo} alt="logo"/> </Link>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>

@@ -1,18 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@500&family=Roboto&family=Ubuntu&display=swap');
-body{
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@500&display=swap');
+
+body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif
 }
+
 .text-center {
-    margin: 35px 0;
-    margin-top: 70px;
-    /* font-weight: 500; */
+    margin: 60px 0 0 0;
+    font-family: 'Merriweather Sans', sans-serif;
 }
+
 /* NAVBAR  */
-#logo{
-    max-width:9.5rem;
+#navbar {
+    box-shadow: 0 5px 15px rgb(0 0 0 / 10%);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 9;
 }
+#logo {
+    max-width: 9.5rem;
+}
+
 .navbar-brand {
     padding: 0;
     margin: 0 1.8rem 0 1rem;
@@ -35,10 +46,39 @@ body{
     max-height: 250px;
     overflow: hidden;
 }
-#navbar{
-    box-shadow: 0 5px 15px rgb(0 0 0 / 10%);
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 9;
+
+
+/* ABOUT  */
+#about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.a-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.a-wrapper .left {
+    height: 80%;
+    margin-right: 2rem;
+}
+Lottie{
+    height: 100%;
+}
+
+.a-wrapper .right {
+    width: 40%;
+    font-size: 1.1rem;
+}
+
+
+@media screen and (max-width:980px) {
+    .navbar-brand {
+        margin: 0 .2rem;
+    }
+
 }

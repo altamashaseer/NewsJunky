@@ -1,5 +1,4 @@
-// import React, { Component } from 'react'
-import loading from './loading.gif'
+import loading from '../media/loading.gif'
 
 const Spinner = () => {
   return (

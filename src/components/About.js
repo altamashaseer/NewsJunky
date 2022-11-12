@@ -16,7 +16,7 @@ const About = () => {
   document.title = `NewsJunky - ${capitalizeFirstLetter(Query)}`
   return (
     <div >
-      {/* <div id='about' className='background' ></div> */}
+      <div id='about' className='background' ></div>
       <h1 className='text-center t-margin' id='a-heading' >About Us!</h1>
       <div className="a-wrapper">
         <div className="left">
@@ -28,7 +28,8 @@ const About = () => {
 
             <p> The search feature allow the easier access to information as per the inputs and interest. <b> NewsJunky uses powerful APIs which allows to search for recent or old articles, way back till 1851! </b></p>
 
-            <p> Our aim to is provide seemless News experience with no ads, fillers. We hope you enjoy our News as much as we enjoy offering them to you. For any suggestions or inputs you can reach out to us via below details. We'd love to hear from you! </p>
+            <p> Our aim to is provide seemless News experience with no ads, fillers. We hope you enjoy our News as much as we enjoy offering them to you.</p>
+            <p>For any suggestions or inputs you can reach out to us via below links. We'd love to hear from you! </p>
           </div>
         </div>
       </div>

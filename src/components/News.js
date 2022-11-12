@@ -16,7 +16,7 @@ const News = (props) => {
     const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-    document.title = `${capitalizeFirstLetter(Query)} - NewsJunky`
+    document.title = `NewsJunky - ${capitalizeFirstLetter(Query)}`
 
     const newsUpdate = async () => {
         props.setProgress(10)
@@ -54,7 +54,7 @@ const News = (props) => {
     return (
         <>
             <Background />
-            <h1 className='text-center'>NewsJunky - {capitalizeFirstLetter(Query)} Headlines</h1>
+            <h1 className='text-center t-margin'>NewsJunky - {capitalizeFirstLetter(Query)} Headlines</h1>
             {loading && <Spinner />}
              
             <InfiniteScroll dataLength={articles.length}

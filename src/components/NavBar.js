@@ -12,12 +12,11 @@ const NavBar = () => {
     //     ref.current.click();
     // }
 
-
     return (
         <div id='navbar'>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id='n-main'>
                 <div class="container-fluid">
-                    <Link className="navbar-brand" onClick={() => { setQuery('general') }} to="/"> <img id='logo' src={logo} alt="logo"/> </Link>
+                    <Link className="navbar-brand" onClick={() => { setQuery('general') }} to="/"> <img id='logo' src={logo} alt="logo" /> </Link>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -37,35 +36,13 @@ const NavBar = () => {
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <Link className="nav-link" aria-current="page" to="/about">About</Link>
+                                <Link className="nav-link" aria-current="page" onClick={() => { setQuery('about') }} to="/about">About</Link>
                             </li>
                         </ul>
                         <Search searchText={(text) => setQuery(text)} />
                     </div>
                 </div>
             </nav>
-            
-           
-           {/* <button ref={ref} type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
-
-           
-            <div class="modal fade bg-dark " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">About</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Hi there! Hope you the website.
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>  */}
-
         </div>
     )
 }

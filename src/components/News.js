@@ -20,7 +20,7 @@ const News = (props) => {
 
     const newsUpdate = async () => {
         props.setProgress(10)
-        const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?page=${page}&api-key=${props.apiKey}&q=${Query}&sort=relevance`;
+        const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?page=${page}&api-key=${props.apiKey}&q=${Query}&sort=newest`;
         // console.log('news update');
         setLoading(true)
         props.setProgress(30)
@@ -34,7 +34,7 @@ const News = (props) => {
     }
 
     const fetchMoreData = async () => {
-        const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?page=${page + 1}&api-key=${props.apiKey}&q=${Query}&sort=relevance`;
+        const url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?page=${page + 1}&api-key=${props.apiKey}&q=${Query}&sort=newest`;
         props.setProgress(30)
         // console.log('fetch more');
         let data = await fetch(url);

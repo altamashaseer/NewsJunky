@@ -1,8 +1,9 @@
-import loading from '../media/loading.gif'
+import loading from '../media/load.gif'
+import '../App.css'
 
 const Spinner = () => {
   return (
-    <div className='text-center'>
+    <div className='text-center' id='spinner'>
       <img src={loading} alt="loading page.." />
     </div>
   )

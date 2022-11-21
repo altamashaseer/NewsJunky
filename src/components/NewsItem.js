@@ -1,4 +1,5 @@
 import React from 'react'
+import defaultImg from '../media/Newsjunky.png'
 
 const NewsItem = (props) => {
     let { title, description, multimedia, newsUrl, author, date, source } = props;
@@ -9,7 +10,7 @@ const NewsItem = (props) => {
                     <span className="badge rounded-pill bg-danger">{source}</span>
                 </div>
                 <div id='c-img-wrapper'>
-                    <img src={multimedia ? `https://www.nytimes.com/${multimedia.url}` : 'https://storage.googleapis.com/afs-prod/media/8fc0c044af78402fbb4ce8aaaef28b27/3000.jpeg'} className="card-img-top" id='c-img' alt="img" />
+                    <img src={multimedia ? `https://www.nytimes.com/${multimedia.url}` : `${defaultImg}`} className="card-img-top" id='c-img' alt="img" />
                 </div>
                 <div className="card-body">
                     <h5 className="card-title">{title}</h5>
